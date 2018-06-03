@@ -1,0 +1,39 @@
+<div class="container">
+
+  <div class="abc">
+
+    <div class="container">
+      <div class="label">Insert data</div>
+      <input matInput placeholder="Name" [(ngModel)]='name'>
+      <input matInput placeholder="Last name" [(ngModel)]='lastName'>
+      <input matInput placeholder="Identity number" [(ngModel)]='identityNumber'>
+
+      <button type="button" class="btn btn-primary" (click)="_onCreateButtonClick()">
+        Add student
+      </button>
+    </div>
+
+    <div class="container">
+      <input matInput placeholder="ID" [(ngModel)]='id'>
+      <button type="button" class="btn btn-primary" (click)="_onGetStudentByIdButtonClick()">
+        Get student by id
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="_onModifyButtonClick()">
+        Modify student
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="_onDeleteButtonClick()">
+        Delete student
+      </button>
+    </div>
+
+    <div class="container">
+      <button type="button" class="btn btn-primary" (click)="_onGetStudents()">
+        Get students
+      </button>
+    </div>
+  </div>
+
+
+</div>
