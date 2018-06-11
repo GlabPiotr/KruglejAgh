@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div class="abc">
+
+    <div class="container">
+      <div class="label">Insert data</div>
+      <input matInput placeholder="Name" [(ngModel)]='name'>
+      <input matInput placeholder="Last name" [(ngModel)]='lastName'>
+      <input matInput placeholder="ID" [(ngModel)]='identityNumber'>
+
+
+      <button type="button" class="btn btn-primary" (click)="_onCreateButtonClick()">
+        Add student
+      </button>
+    </div>
+
+    <div class="container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let user"> {{user.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Last name">
+          <th mat-header-cell *matHeaderCellDef> Name</th>
+          <td mat-cell *matCellDef="let user"> {{user.lastName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef> Id</th>
+          <td mat-cell *matCellDef="let user"> {{user.identityNumber}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsNames"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsNames;"></tr>
+      </table>
+
+      <button type="button" class="btn btn-primary" (click)="_onGetStudents()">
+        Get students
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="_onGetStudentByIdButtonClick()">
+        Get student by id
+      </button>
+      <input matInput placeholder="ID" [(ngModel)]='id'>
+    </div>
+
+
+    <div class="container">
+      <button type="button" class="btn btn-primary" (click)="_onModifyButtonClick()">
+        Modify student
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="_onDeleteButtonClick()">
+        Delete student
+      </button>
+    </div>
+  </div>
+
+
+</div>
