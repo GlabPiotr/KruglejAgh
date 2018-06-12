@@ -1,12 +1,4 @@
-.container {
-  float: left;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
 .btn {
-  margin-left: 10px;
-  margin-right: 10px;
   width: 160px !important;
 }
 
@@ -14,3 +6,14 @@ table {
   width: 100%;
 }
 
+input {
+  margin-right: 10px;
+}
+
+th {
+  padding-top: 12px;
+}
+
+.card {
+  margin-top: 20px;
+}

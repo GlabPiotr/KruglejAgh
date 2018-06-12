@@ -1,26 +1,28 @@
 <div class="container">
 
-  <div class="abc">
-
-    <div class="container">
-      <div class="label">Insert data</div>
-      <input matInput placeholder="Name" [(ngModel)]='name'>
-      <input matInput placeholder="Last name" [(ngModel)]='lastName'>
-      <input matInput placeholder="ID" [(ngModel)]='identityNumber'>
-
-
-      <button type="button" class="btn btn-primary" (click)="_onCreateButtonClick()">
+  <div class="card border-primary">
+    <div class="card-header">Insert student`s data</div>
+    <div class="card-body">
+      <input class="form-control col-sm-5 mb-3" matInput placeholder="Name" [(ngModel)]='name'>
+      <input class="form-control col-sm-5 mb-3" matInput placeholder="Last name" [(ngModel)]='lastName'>
+      <input class="form-control col-sm-5 mb-3" matInput placeholder="ID" [(ngModel)]='identityNumber'>
+      <button type="button" class="btn btn-success" (click)="_onCreateButtonClick()">
         Add student
       </button>
     </div>
+  </div>
 
-    <div class="container">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table">
-        <ng-container matColumnDef="select">
+  <div class="card border-primary">
+    <div class="card-header">Students at the University of Science and Technology</div>
+    <div class="card-body">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-3">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="Select">
           <th mat-header-cell *matHeaderCellDef>
           </th>
           <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()"
+            <mat-checkbox (click)="_onItemClicked($event, selection, row)"
                           (change)="$event ? selection.toggle(row) : null"
                           [checked]="selection.isSelected(row)">
             </mat-checkbox>
@@ -29,44 +31,44 @@
 
         <ng-container matColumnDef="Name">
           <th mat-header-cell *matHeaderCellDef> Name</th>
-          <td mat-cell *matCellDef="let user"> {{user.name}}</td>
+          <td mat-cell *matCellDef="let element"> {{element.name}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="Last name">
-          <th mat-header-cell *matHeaderCellDef> Name</th>
-          <td mat-cell *matCellDef="let user"> {{user.lastName}}</td>
+        <ng-container matColumnDef="Last Name">
+          <th mat-header-cell *matHeaderCellDef> Last Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="Id">
-          <th mat-header-cell *matHeaderCellDef> Id</th>
-          <td mat-cell *matCellDef="let user"> {{user.identityNumber}}</td>
+        <ng-container matColumnDef="Identity Number">
+          <th mat-header-cell *matHeaderCellDef> Identity Number</th>
+          <td mat-cell *matCellDef="let element"> {{element.identityNumber}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="columnsNames"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnsNames;"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsNames;"
+            (click)="selection.toggle(row)">
+        </tr>
       </table>
 
-      <button type="button" class="btn btn-primary" (click)="_onGetStudents()">
+      <button type="button" class="btn btn-primary mb-3 mr-3" (click)="_onGetStudents()">
         Get students
       </button>
 
-      <button type="button" class="btn btn-primary" (click)="_onGetStudentByIdButtonClick()">
-        Get student by id
-      </button>
-      <input matInput placeholder="ID" [(ngModel)]='id'>
-    </div>
 
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary mb-3" type="button" (click)="_onGetStudentByIdButtonClick()"> Get student
+            by id
+          </button>
+        </div>
+        <input class="form-control col-sm-5 mb-3" matInput placeholder="ID" [(ngModel)]='id'>
+      </div>
 
-    <div class="container">
-      <button type="button" class="btn btn-primary" (click)="_onModifyButtonClick()">
-        Modify student
-      </button>
-
-      <button type="button" class="btn btn-primary" (click)="_onDeleteButtonClick()">
+      <button type="button" class="btn  mb-3 mr-3 btn-danger" (click)="_onDeleteButtonClick()"
+              [disabled]="isActionsButtonDisabled">
         Delete student
       </button>
     </div>
   </div>
-
 
 </div>
