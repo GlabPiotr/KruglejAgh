@@ -15,18 +15,17 @@ export class AppComponent {
   lastName: string;
   identityNumber: number;
   id: number;
-  students: Array<any> = [new Student("a", "b", 1), new Student("c", "d", 2)];
 
   columnsNames = ['Select', 'Name', 'Last Name', 'Identity Number'];
 
-  dataSource = new MatTableDataSource<Element>(this.students);
+  dataSource = new MatTableDataSource<Student>([]);
   selection = new SelectionModel<any>(false, []);
 
   isActionsButtonDisabled = true;
 
   selectedStudent: Student = null;
 
-  constructor() {
+  constructor(private studentsService: StudentsService) {
   }
 
   _onItemClicked(event, selection, data): void {
@@ -46,18 +45,19 @@ export class AppComponent {
   }
 
   private _onGetStudentByIdButtonClick(): void {
-    this.studentsService.getStudentById(this.id).subscribe(elem => this.students = [new Student("y", "w", 7)]);
+    this.studentsService.getStudentById(this.id).subscribe(student => this.dataSource.data = [student]);
   }
 
   private _onDeleteButtonClick(): void {
-    this.studentsService.deleteStudent(this.selectedStudent.id).subscribe(() => {
+    this.studentsService.deleteStudent(this.selectedStudent.identityNumber).subscribe(() => {
+
+      let index = this.dataSource.data.findIndex(student => student.identityNumber === this.selectedStudent.identityNumber); //find index in your array
+      this.dataSource.data.splice(index, 1);//remove element from array
     });
   }
 
-
   private _onGetStudents(): void {
-    this.students = [new Student("a", "b", 1), new Student("c", "d", 2)];
-    this.studentsService.getStudents().subscribe(elem => this.students = [new Student("a", "b", 1), new Student("c", "d", 2)]);
+    this.studentsService.getStudents().subscribe(students => this.dataSource.data = students);
   }
 
 }

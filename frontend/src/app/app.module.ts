@@ -1,5 +1,6 @@
 import '../polyfills';
 
+import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table'
 import {CdkTableModule} from '@angular/cdk/table';
 import {NgModule} from '@angular/core';
@@ -43,6 +44,7 @@ import {
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppComponent} from "./app.component";
+import {StudentsService} from "./services/students.service";
 
 
 @NgModule({
@@ -88,6 +90,7 @@ import {AppComponent} from "./app.component";
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     MatNativeDateModule,
     FormsModule,
@@ -100,7 +103,7 @@ import {AppComponent} from "./app.component";
     MatCheckboxModule
   ],
   entryComponents: [AppComponent],
-  providers: [],
+  providers: [StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
